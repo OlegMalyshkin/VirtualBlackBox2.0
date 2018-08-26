@@ -14,9 +14,9 @@ import javafx.stage.Stage;
  * This program imitates two processes:
  * 1st - recording flight data to cloud storage.
  * Flight parameters comes from Flight Gear (flight simulator) and recording in database.
- * All processes occur in real time.
  * 2nd - reading parameters from cloud database.
- * This parameters display in listViews and plotting graphs for each
+ * This parameters display in listViews and plotting graphs for each.
+ * All processes occur in real time.
  *
  * @author Oleg Malyshkin
  * @version 2.0
