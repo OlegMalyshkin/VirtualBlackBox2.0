@@ -30,7 +30,7 @@
         <!-- Indicatedspeed -->
         <property name="paramVi" type="java.lang.Double" length="25">
             <column name="Vi" length="25"/>
-        </property>
+        </property> 
         <!-- Longitude -->
         <property name="paramLon" type="java.lang.Double" length="25">
             <column name="Lon" length="25"/>
