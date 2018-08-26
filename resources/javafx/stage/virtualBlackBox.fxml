@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" style="-fx-background-image: url('javafx/images/background.jpg'); -fx-background-size: cover; -fx-background-color: #40a2c9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.controller.VirtualBlackBoxController">
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ProgressBar fx:id="progressBar" maxWidth="1.7976931348623157E308" prefWidth="200.0" progress="0.0" GridPane.columnSpan="2147483647">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </ProgressBar>
+            <Label fx:id="lblStatus" text="НЕ ПІДКЛЮЧЕНО" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+   </bottom>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <top>
+          <MenuBar prefHeight="25.0" prefWidth="551.0" BorderPane.alignment="CENTER">
+              <menus>
+                  <Menu mnemonicParsing="false" text="Файл">
+                      <items>
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemBeginOnAction" text="Старт" />
+                  <MenuItem fx:id="menuItemStop" mnemonicParsing="false" onAction="#menuItemStopOnAction" text="Стоп" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                          <MenuItem mnemonicParsing="false" onAction="#menuItemExitOnAction" text="Вийти" />
+                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Довідка">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#menuItemInformationOnAction" text="Довідка" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#menuItemAboutOnAction" text="Про програму" />
+                      </items>
+                  </Menu>
+              </menus>
+          </MenuBar>
+   </top>
+   <center>
+          <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="275.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="360.0" minHeight="10.0" prefHeight="197.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="323.0" minHeight="10.0" prefHeight="228.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+              <children>
+                  <GridPane GridPane.rowIndex="1">
+                      <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="124.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="0.0" prefWidth="129.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="369.0" minWidth="10.0" prefWidth="143.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="10.0" prefWidth="159.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                      <children>
+                  <GridPane GridPane.columnSpan="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="34.0" minHeight="2.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="75.0" minHeight="0.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                           <effect>
+                              <Shadow blurType="GAUSSIAN" />
+                           </effect>
+                           <GridPane.margin>
+                              <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
+                           </GridPane.margin>
+                        </Pane>
+                                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="199.0" text="Місцезнаходження" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="4">
+                                      <font>
+                                          <Font name="System Bold" size="14.0" />
+                                      </font>
+                                  </Label>
+                        <ListView fx:id="listViewParamLon" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                        <RadioButton fx:id="rbtnParamLat" mnemonicParsing="false" onAction="#rbtnParamLatOnAction" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="rbtnParamLon" mnemonicParsing="false" onAction="#rbtnParamLonOnAction" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Широта" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Довгота" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <ListView fx:id="listViewParamLat" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <GridPane GridPane.columnIndex="2" GridPane.columnSpan="3">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                           <effect>
+                              <Shadow blurType="GAUSSIAN" />
+                           </effect>
+                           <GridPane.margin>
+                              <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
+                           </GridPane.margin>
+                        </Pane>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="199.0" text="Швидкість" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="6">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="listViewParamVg" prefHeight="130.0" prefWidth="106.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                        <ListView fx:id="listViewParamVi" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                        <RadioButton fx:id="rbtnParamVg" mnemonicParsing="false" onAction="#rbtnParamVgOnAction" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="rbtnParamVi" mnemonicParsing="false" onAction="#rbtnParamViOnAction" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Шляхова" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Індикаторна" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Істинна" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <RadioButton fx:id="rbtnParamVt" mnemonicParsing="false" onAction="#rbtnParamVtOnAction" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <ListView fx:id="listViewParamVt" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="34.0" minHeight="2.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="75.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="169.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                      </children>
+                  </GridPane>
+                  <GridPane alignment="CENTER" prefHeight="137.0" prefWidth="628.0">
+                      <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      </columnConstraints>
+                      <rowConstraints>
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      </rowConstraints>
+                      <children>
+                          <ImageView fitHeight="91.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                              <image>
+                                  <Image url="javafx/images/server.png" />
+                              </image>
+                              <viewport>
+                                  <Rectangle2D />
+                              </viewport>
+                          </ImageView>
+                          <ImageView fitHeight="100.0" fitWidth="184.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
+                              <image>
+                                  <Image url="javafx/images/aircraft.png" />
+                              </image>
+                          </ImageView>
+                          <Circle fx:id="c1" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                          <Circle fx:id="c2" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                          <Circle fx:id="c3" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                          <Circle fx:id="c4" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                          <Circle fx:id="c5" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="7" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                          <Circle fx:id="c6" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="8" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
+                          <Circle fx:id="c7" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="9" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" />
+                          <Circle fx:id="c8" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="14" />
+                          <Circle fx:id="c9" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="15" GridPane.rowIndex="1" />
+                          <Circle fx:id="c10" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="16" GridPane.rowIndex="2" />
+                          <Circle fx:id="c11" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="3" />
+                          <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="21" GridPane.rowIndex="5">
+                              <image>
+                                  <Image url="javafx/images/taker.png" />
+                              </image>
+                              <viewport>
+                                  <Rectangle2D />
+                              </viewport>
+                              <GridPane.margin>
+                                  <Insets />
+                              </GridPane.margin>
+                          </ImageView>
+                          <Circle fx:id="c12" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="18" GridPane.rowIndex="4" />
+                          <Circle fx:id="c14" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="20" GridPane.rowIndex="5" />
+                          <Circle fx:id="c13" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="19" GridPane.rowIndex="5" />
+                      </children>
+                  </GridPane>
+            <GridPane layoutX="10.0" layoutY="125.0" GridPane.rowIndex="2">
+               <children>
+                  <GridPane GridPane.columnSpan="3">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                           <GridPane.margin>
+                              <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
+                           </GridPane.margin>
+                           <effect>
+                              <Shadow blurType="GAUSSIAN" color="#080808" />
+                           </effect>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Pane>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="199.0" text="Розташування у просторі" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="6">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="listViewParamR" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                        <ListView fx:id="listViewParamH" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                        <RadioButton fx:id="rbtnParamR" mnemonicParsing="false" onAction="#rbtnParamROnAction" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="rbtnParamH" mnemonicParsing="false" onAction="#rbtnParamHOnAction" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Крен" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Курс" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Тангаж" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <RadioButton fx:id="rbtnParamP" mnemonicParsing="false" onAction="#rbtnParamPOnAction" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <ListView fx:id="listViewParamP" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="34.0" minHeight="2.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="75.0" minHeight="0.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="221.0" minHeight="10.0" prefHeight="156.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <GridPane GridPane.columnIndex="3" GridPane.columnSpan="2">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                           <GridPane.margin>
+                              <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
+                           </GridPane.margin>
+                           <effect>
+                              <Shadow blurType="GAUSSIAN" />
+                           </effect>
+                        </Pane>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="199.0" text="Висота" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="4">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="listViewParamA" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </ListView>
+                        <RadioButton fx:id="rbtnParamA" mnemonicParsing="false" onAction="#rbtnParamAOnAction" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </RadioButton>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Абсолютна" textAlignment="CENTER" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <GridPane.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </GridPane.margin>
+                        </Label>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="34.0" minHeight="2.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="75.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="212.0" minHeight="10.0" prefHeight="155.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </GridPane.margin>
+                  </GridPane>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="0.0" prefWidth="158.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="369.0" minWidth="10.0" prefWidth="141.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="447.0" minWidth="10.0" prefWidth="153.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+              </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+          </GridPane>
+   </center>
+</BorderPane>
