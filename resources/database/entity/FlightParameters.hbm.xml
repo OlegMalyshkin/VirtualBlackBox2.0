@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="database.entity.FlightParameters">
+        <!--Ключевое поле-->
+        <id name="id" type="java.lang.Long">
+            <column name="ID"/>
+            <generator class="increment"/>
+        </id>
+        <!-- Связываем -->
+        <!-- Time (sec) -->
+        <property name="paramT" type="java.lang.Double" length="25">
+            <column name="T" length="25"/>
+        </property>
+        <!-- Altitude in meters MSL -->
+        <property name="paramA" type="java.lang.Double" length="25">
+            <column name="A" length="25"/>
+        </property>
+        <!-- Groundspeed -->
+        <property name="paramVg" type="java.lang.Double" length="25">
+            <column name="Vg" length="25"/>
+        </property>
+        <!-- Truespeed -->
+        <property name="paramVt" type="java.lang.Double" length="25">
+            <column name="Vt" length="25"/>
+        </property>
+        <!-- Indicatedspeed -->
+        <property name="paramVi" type="java.lang.Double" length="25">
+            <column name="Vi" length="25"/>
+        </property>
+        <!-- Longitude -->
+        <property name="paramLon" type="java.lang.Double" length="25">
+            <column name="Lon" length="25"/>
+        </property>
+        <!-- Latitude -->
+        <property name="paramLat" type="java.lang.Double" length="25">
+            <column name="Lat" length="25"/>
+        </property>
+        <!-- heading angle (deg) -->
+        <property name="paramH" type="java.lang.Double" length="25">
+            <column name="H" length="25"/>
+        </property>
+        <!-- pitch angle (deg) -->
+        <property name="paramP" type="java.lang.Double" length="25">
+            <column name="P" length="25"/>
+        </property>
+        <!-- roll angle (deg) -->
+        <property name="paramR" type="java.lang.Double" length="25">
+            <column name="R" length="25"/>
+        </property>
+    </class>
+</hibernate-mapping>
