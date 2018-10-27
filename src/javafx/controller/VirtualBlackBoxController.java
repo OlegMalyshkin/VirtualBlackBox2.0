@@ -265,7 +265,7 @@ public class VirtualBlackBoxController {
         Runnable getFlightParamSteam = (() -> {
             while (isStopGetFlightParamSteam) {
                 //waiting for reading
-                if (service.read(id) != null) {
+                if (service != null && service.read(id) != null) {
                     parametersFromDataBase = service.read(id);
                     if (parameters != null) {
                         scrollEndId = id.intValue();
@@ -330,7 +330,7 @@ public class VirtualBlackBoxController {
         return getFlightParamSteam;
     }
 
-    //start two threads
+    //starting of two threads
     private void start(){
         es.execute(flight());
         es.execute(getFlightParams());

@@ -27,7 +27,7 @@ public class VirtualBlackBox extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Virtual Black Box");
         Parent root = FXMLLoader.load(
-                getClass().getResource("javafx/stage/virtualBlackBox.fxml")
+                getClass().getResource("/javafx/view/virtualBlackBox.fxml")
         );
         Scene scene = new Scene(root);
         scene.getStylesheets().add("javafx/style/style.css");
