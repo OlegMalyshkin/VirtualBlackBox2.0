@@ -1,17 +1,22 @@
-package javafx.controller;
+package GUI.controller;
 
+import database.entity.FlightParameters;
+import database.service.FlightParametersService;
 import javafx.animation.Animation;
 import javafx.animation.FillTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.graph.Graph;
-import javafx.scene.control.*;
+import GUI.graph.Graph;
 import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,11 +34,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class VirtualBlackBoxControllerWithOutDataBase {
+public class VirtualBlackBoxController {
 
     @FXML private Label lblStatus;
 
     @FXML private ProgressBar progressBar;
+
+    @FXML private MenuItem menuItemStop;
 
     @FXML private Circle c1;
     @FXML private Circle c2;
@@ -99,6 +106,16 @@ public class VirtualBlackBoxControllerWithOutDataBase {
     private Double paramP;
     private Double paramR;
 
+    private Double paramAFromDatabase;
+    private Double paramVgFromDatabase;
+    private Double paramVtFromDatabase;
+    private Double paramViFromDatabase;
+    private Double paramLonFromDatabase;
+    private Double paramLatFromDatabase;
+    private Double paramHFromDatabase;
+    private Double paramPFromDatabase;
+    private Double paramRFromDatabase;
+
     private ExecutorService es;
 
     private Graph graphParamLat;
@@ -114,6 +131,15 @@ public class VirtualBlackBoxControllerWithOutDataBase {
     private int time = 0;
 
     private int scrollEndId = 1;
+
+    private Long id = 1L;
+
+    private boolean isStopGetFlightParamSteam = true;
+
+    private FlightParameters parameters;
+    private FlightParameters parametersFromDataBase;
+
+    private FlightParametersService service;
 
     @FXML
     private void initialize(){
@@ -138,8 +164,10 @@ public class VirtualBlackBoxControllerWithOutDataBase {
         listViewParamH.setItems(observableListParamH);
         listViewParamA.setItems(observableListParamA);
 
+        //array of circles for create animation simpler
         circles = new Circle[]{c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14};
 
+        //create graphs with own names
         graphParamLat = new Graph("Місцезнаходження", "Широта");
         graphParamLon = new Graph("Місцезнаходження", "Довгота");
         graphParamVg = new Graph("Швидкість", "Шляхова швидкість");
@@ -150,22 +178,41 @@ public class VirtualBlackBoxControllerWithOutDataBase {
         graphParamH = new Graph("Положення в просторі", "Кут курсу (град)");
         graphParamA = new Graph("Висота", "Абсолютна висота");
 
-        es = Executors.newSingleThreadExecutor();
+        /**
+         * There are two threads:
+         * 1st for imitation of real flight of aircraft
+         * 2nd for imitation reading data from cloud data storage
+         */
+        es = Executors.newFixedThreadPool(2);
     }
 
+    /**
+     * This method return object of Runnable
+     * This is the 1st of the main threads
+     * Contains of few steps:
+     * 1. create connection with Flight Gear (aviation simulator)
+     * 2. getting flight parameters from FG with helps of own special protocol
+     * 3. separating a string into separate variables
+     * 4. recording this parameters into cloud data storage
+     * @return flightSteam
+     */
     private Runnable flight(){
         Runnable flightSteam = (() -> {
             try {
+                ApplicationContext context =
+                        new ClassPathXmlApplicationContext(
+                                "database/spring/config/springconfig.xml");
+                service = context.getBean(FlightParametersService.class);
                 server = new ServerSocket(5500);
                 flightgear = server.accept();
                 Platform.runLater(() -> {
-                    lblStatus.setText("Статус: ВСТАНОВЛЮЄТЬСЯ З'ЄДНАННЯ");
+                    lblStatus.setText("ВСТАНОВЛЮЄТЬСЯ З'ЄДНАННЯ");
                     progressBar.setProgress(-1);
                 });
                 in = new BufferedReader(new InputStreamReader(flightgear.getInputStream()));
                 if(in.readLine() != null){
                     Platform.runLater(() -> {
-                        lblStatus.setText("Cтатус: З'ЄДНАННЯ ВСТАНОВЛЕНО");
+//                        lblStatus.setText("З'ЄДНАННЯ ВСТАНОВЛЕНО");
                         lblStatus.setVisible(false);
                         progressBar.setProgress(0);
                     });
@@ -183,16 +230,63 @@ public class VirtualBlackBoxControllerWithOutDataBase {
                     paramP = Double.parseDouble(line.substring(line.indexOf("P") + 1, line.lastIndexOf("R") - 1));
                     paramR = Double.parseDouble(line.substring(line.indexOf("R") + 1, line.length()));
                     if (paramT > 1.0) {
+                        parameters = new FlightParameters(paramT, paramA, paramVg, paramVt, paramVi, paramLon, paramLat, paramH, paramP, paramR);
+                        service.create(parameters);
+                    }
+                }
+            } catch (IOException e) {
+                Platform.runLater(() -> {
+                    lblStatus.setText("ПОМИЛКА З'ЄДНАННЯ З FLIGHTGEAR " + e.getMessage());
+                    progressBar.setProgress(0);
+                });
+            } catch (Exception e){
+                Platform.runLater(() -> {
+                    lblStatus.setText("ПОМИЛКА " + e.getMessage());
+                    progressBar.setProgress(0);
+                });
+            }
+        });
+        return flightSteam;
+    }
+
+    /**
+     * This method return object of Runnable
+     * This is the 2nd of the main threads
+     * Contains of few steps:
+     * 1. connecting with database
+     * 2. getting entity
+     * 3. separating it into separate variables
+     * 4. adding them in individual listViews
+     * 5. creating graph for each parameter
+     * @return getFlightParamSteam
+     */
+    private Runnable getFlightParams() {
+        Runnable getFlightParamSteam = (() -> {
+            while (isStopGetFlightParamSteam) {
+                //waiting for reading
+                if (service != null && service.read(id) != null) {
+                    parametersFromDataBase = service.read(id);
+                    if (parameters != null) {
+                        scrollEndId = id.intValue();
+                        paramLatFromDatabase = parametersFromDataBase.getParamLat();
+                        paramLonFromDatabase = parametersFromDataBase.getParamLon();
+                        paramVgFromDatabase = parametersFromDataBase.getParamVg();
+                        paramVtFromDatabase = parametersFromDataBase.getParamVt();
+                        paramViFromDatabase = parametersFromDataBase.getParamVi();
+                        paramRFromDatabase = parametersFromDataBase.getParamR();
+                        paramPFromDatabase = parametersFromDataBase.getParamP();
+                        paramHFromDatabase = parametersFromDataBase.getParamH();
+                        paramAFromDatabase = parametersFromDataBase.getParamA();
                         Platform.runLater(() -> {
-                            observableListParamLat.add(paramLat);
-                            observableListParamLon.add(paramLon);
-                            observableListParamVg.add(paramVg);
-                            observableListParamVt.add(paramVt);
-                            observableListParamVi.add(paramVi);
-                            observableListParamR.add(paramR);
-                            observableListParamP.add(paramP);
-                            observableListParamH.add(paramH);
-                            observableListParamA.add(paramA);
+                            observableListParamLat.add(paramLatFromDatabase);
+                            observableListParamLon.add(paramLonFromDatabase);
+                            observableListParamVg.add(paramVgFromDatabase);
+                            observableListParamVt.add(paramVtFromDatabase);
+                            observableListParamVi.add(paramViFromDatabase);
+                            observableListParamR.add(paramRFromDatabase);
+                            observableListParamP.add(paramPFromDatabase);
+                            observableListParamH.add(paramHFromDatabase);
+                            observableListParamA.add(paramAFromDatabase);
                             listViewParamLat.refresh();
                             listViewParamLon.refresh();
                             listViewParamVg.refresh();
@@ -211,28 +305,34 @@ public class VirtualBlackBoxControllerWithOutDataBase {
                             listViewParamP.scrollTo(scrollEndId);
                             listViewParamH.scrollTo(scrollEndId);
                             listViewParamA.scrollTo(scrollEndId);
-                            scrollEndId++;
+                            id++;
                         });
-                        createGraph(graphParamLat, paramLat);
-                        createGraph(graphParamLon, paramLon);
-                        createGraph(graphParamVg, paramVg);
-                        createGraph(graphParamVt, paramVt);
-                        createGraph(graphParamVi, paramVi);
-                        createGraph(graphParamR, paramR);
-                        createGraph(graphParamP, paramP);
-                        createGraph(graphParamH, paramH);
-                        createGraph(graphParamA, paramA);
+                        createGraph(graphParamLat, paramLatFromDatabase);
+                        createGraph(graphParamLon, paramLonFromDatabase);
+                        createGraph(graphParamVg, paramVgFromDatabase);
+                        createGraph(graphParamVt, paramVtFromDatabase);
+                        createGraph(graphParamVi, paramViFromDatabase);
+                        createGraph(graphParamR, paramRFromDatabase);
+                        createGraph(graphParamP, paramPFromDatabase);
+                        createGraph(graphParamH, paramHFromDatabase);
+                        createGraph(graphParamA, paramAFromDatabase);
+                    }
+                } else {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         });
-        return flightSteam;
+        return getFlightParamSteam;
     }
 
+    //starting of two threads
     private void start(){
         es.execute(flight());
+        es.execute(getFlightParams());
     }
 
     @FXML
@@ -323,6 +423,7 @@ public class VirtualBlackBoxControllerWithOutDataBase {
 
     @FXML
     public void menuItemStopOnAction(){
+        isStopGetFlightParamSteam = false;
         if(!es.isTerminated()){
             try {
                 es.awaitTermination(1, TimeUnit.SECONDS);
@@ -343,7 +444,6 @@ public class VirtualBlackBoxControllerWithOutDataBase {
     @FXML
     public void menuItemAboutOnAction(){
         showFrameAbout();
-        animationCircles();
     }
 
     @FXML
@@ -351,6 +451,12 @@ public class VirtualBlackBoxControllerWithOutDataBase {
         showAlertHelp();
     }
 
+    /**
+     * This method create an animation of circles
+     * It creates array of FillTransition and
+     * every 7 sec circle change color from white to transparency
+     * with delay 1 sec
+     */
     private void animationCircles(){
         FillTransition[] fillTransitions = new FillTransition[14];
         int k = 0;
@@ -362,6 +468,11 @@ public class VirtualBlackBoxControllerWithOutDataBase {
         }
     }
 
+    /**
+     * This method draws graphic of dependence of param from time
+     * @param graph graph with special own name
+     * @param param one of parameters
+     */
     private void createGraph(Graph graph, Double param){
         graph.getSeries().add(time++, param);
         graph.getWindow().repaint();
@@ -373,7 +484,7 @@ public class VirtualBlackBoxControllerWithOutDataBase {
         frameAbout.setLayout(new BorderLayout());
         JLabel background = new JLabel(new ImageIcon(new File(System.getProperty("user.dir") +
                 File.separator + "resources" +
-                File.separator + "javafx" +
+                File.separator + "GUI" +
                 File.separator + "images" +
                 File.separator + "background.jpg").toString()));
         frameAbout.add(background);
@@ -388,7 +499,7 @@ public class VirtualBlackBoxControllerWithOutDataBase {
             }
         });
         JTextArea textAbout = new JTextArea(
-                "Virtual Black Box – це спеціальна програма, яка \n" +
+                "Virtual Black Box 2.0 – це спеціальна програма, яка \n" +
                 "реалізує новий спосіб збереження важливої \n" +
                 "інформації з літака, яка називається авігаційними \n" +
                 "даними. Бортовий самописець також відомий, як \n" +
@@ -409,7 +520,7 @@ public class VirtualBlackBoxControllerWithOutDataBase {
         textAbout.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         background.add(new JLabel(new ImageIcon(new ImageIcon(new File(System.getProperty("user.dir") +
                 File.separator + "resources" +
-                File.separator + "javafx" +
+                File.separator + "GUI" +
                 File.separator + "images" +
                 File.separator + "server.png").toString()).getImage().
                 getScaledInstance(100, 100, Image.SCALE_DEFAULT))));
@@ -431,7 +542,7 @@ public class VirtualBlackBoxControllerWithOutDataBase {
     private void showAlertHelp(){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Help");
-        alert.setHeaderText("Virtual Black Box");
+        alert.setHeaderText("Virtual Black Box 2.0");
         alert.setContentText(
                 "1. ввімкніть FlightGear\n" +
                 "2. в налаштуваннях виберіть протокол my_protocol_20_05.xml\n" +

@@ -1,4 +1,4 @@
-package javafx.graph;
+package GUI.graph;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -32,7 +32,7 @@ public class Graph {
                 window.setVisible(false);
             }
         });
-        series = new XYSeries("Light Sensor Readings");
+        series = new XYSeries("");
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         JFreeChart chart = ChartFactory.createXYLineChart(yAxisLabel, "Час (сек)", yAxisLabel, dataset,
                 PlotOrientation.VERTICAL, false, true, false);
@@ -40,7 +40,7 @@ public class Graph {
             chart.setBackgroundImage(ImageIO.read(new URL(
                     new File(System.getProperty("user.dir") +
                             File.separator + "resources" +
-                            File.separator + "javafx" +
+                            File.separator + "GUI" +
                             File.separator + "images" +
                             File.separator + "background.jpg").toURI().toString())));
         } catch (IOException e) {

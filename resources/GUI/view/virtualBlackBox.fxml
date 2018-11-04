@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" style="-fx-background-image: url('javafx/images/background.jpg'); -fx-background-size: cover; -fx-background-color: #40a2c9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.controller.VirtualBlackBoxController">
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="650.0" style="-fx-background-image: url('GUI/images/background.jpg'); -fx-background-size: cover; -fx-background-color: #40a2c9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.controller.VirtualBlackBoxController">
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -290,7 +290,7 @@
                       <children>
                           <ImageView fitHeight="91.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="11" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                               <image>
-                                  <Image url="javafx/images/server.png" />
+                                  <Image url="GUI/images/server.png" />
                               </image>
                               <viewport>
                                   <Rectangle2D />
@@ -298,7 +298,7 @@
                           </ImageView>
                           <ImageView fitHeight="100.0" fitWidth="184.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
                               <image>
-                                  <Image url="javafx/images/aircraft.png" />
+                                  <Image url="GUI/images/aircraft.png" />
                               </image>
                           </ImageView>
                           <Circle fx:id="c1" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
@@ -314,7 +314,7 @@
                           <Circle fx:id="c11" fill="#0084b5" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" GridPane.columnIndex="17" GridPane.rowIndex="3" />
                           <ImageView fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="21" GridPane.rowIndex="5">
                               <image>
-                                  <Image url="javafx/images/taker.png" />
+                                  <Image url="GUI/images/taker.png" />
                               </image>
                               <viewport>
                                   <Rectangle2D />
