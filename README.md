@@ -4,3 +4,5 @@ This program imitates two processes:
 * 1st - recording flight data to cloud storage. Flight parameters comes from Flight Gear (flight simulator) and recording in database.
 * 2nd - reading parameters from cloud database. This parameters display in listViews and plotting graphs for each.
 #### All processes occur in real time.
+
+[![http://img.youtube.com/vi/XS3swpmc6O0/0.jpg](http://img.youtube.com/vi/XS3swpmc6O0/0.jpg)](http://www.youtube.com/watch?v=XS3swpmc6O0 "Virtual Black Box 2.0")
