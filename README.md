@@ -9,4 +9,4 @@ Two main processes:
 Virtual Black Box 2.0 + FlightGear 
 
 
-[![http://img.youtube.com/vi/XS3swpmc6O0/0.jpg](http://img.youtube.com/vi/XS3swpmc6O0/0.jpg)](http://www.youtube.com/watch?v=XS3swpmc6O0 "Virtual Black Box 2.0")
+[![http://img.youtube.com/vi/yD8GXnEXgCI/0.jpg](http://img.youtube.com/vi/yD8GXnEXgCI/0.jpg)](http://www.youtube.com/watch?v=XS3swpmc6O0 "Virtual Black Box 2.0")
