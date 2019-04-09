@@ -5,7 +5,6 @@ Two main processes:
 * 2nd - reading parameters from cloud database. These parameters are represented in listView and on charts.
 #### All processes occur in real time.
 
-### Video 
-(Click on picture)
+### Video (Click on picture)
 
 [![http://img.youtube.com/vi/yD8GXnEXgCI/0.jpg](http://img.youtube.com/vi/yD8GXnEXgCI/0.jpg)](http://www.youtube.com/watch?v=yD8GXnEXgCI "Virtual Black Box 2.0")
