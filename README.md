@@ -6,6 +6,6 @@ Two main processes:
 #### All processes occur in real time.
 
 ### See video 
-####(click on the picture below)
+#### (click on the picture below)
 
 [![http://img.youtube.com/vi/yD8GXnEXgCI/0.jpg](http://img.youtube.com/vi/yD8GXnEXgCI/0.jpg)](http://www.youtube.com/watch?v=yD8GXnEXgCI "Virtual Black Box 2.0")
