@@ -4,7 +4,7 @@ Two main processes:
 * 1st - recording flight data to cloud storage. Flight parameters comes from Flight Gear (flight simulator) and recording in database.
 * 2nd - reading parameters from cloud database. These parameters are represented in listView and on charts.
 #### All processes occur in real time.
----
+
 ### See video (click on the picture below)
 
 [![http://img.youtube.com/vi/yD8GXnEXgCI/0.jpg](http://img.youtube.com/vi/yD8GXnEXgCI/0.jpg)](http://www.youtube.com/watch?v=yD8GXnEXgCI "Virtual Black Box 2.0")
